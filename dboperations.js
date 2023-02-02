@@ -105,6 +105,26 @@ async function getStaff_Details(registerNumber){
     }
 }
 
+async function getAdmin_Details(admin_code){
+  const text = 'select * from admin_profile where admin_code = $1'
+  const values = [admin_code]
+  var res;
+  const client = new Client(config); 
+  client.connect();
+  try {
+       await client.query(text, values).then(result => res =  result.rows)
+      .catch(e => console.error(e.stack))
+      .then(() => client.end());
+      
+    console.log(res);
+    return res;
+      
+      // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
+    } catch (err) {
+      console.log(err.stack)
+    }
+}
+
 
 async function addapplication_form(application_name,application_age,application_phonenumber,application_dob,application_email,father_occuption,mother_occuption,annual_income,address,pin_code,admission_class,gender,father_name,mother_name,father_phonenumber,mother_phonenumber){
   try{
@@ -193,4 +213,5 @@ module.exports= {
    getFeedback_Details: getFeedback_Details,
     getStaff_Details: getStaff_Details,
     getLogins: getLogins,
+    getAdmin_Details: getAdmin_Details,
 }

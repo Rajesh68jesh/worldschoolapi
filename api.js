@@ -51,6 +51,13 @@ router.route("/staff/:staffCode").get((request,response)=>{
     })
 })
 
+//http://localhost:8090/api/admin/2015034
+router.route("/admin/:admin_code").get((request,response)=>{
+    dboperations.getAdmin_Details(request.params.admin_code).then(result =>{
+        response.json(result);
+    })
+})
+
 //http://localhost:8090/api/application_form
 router.route("/application_form").post((request,response)=>{
     let {application_name,application_age,application_phonenumber,application_dob,application_email,father_occuption,mother_occuption,annual_income,address,pin_code,admission_class,gender,father_name,mother_name,father_phonenumber,mother_phonenumber} = request.body
